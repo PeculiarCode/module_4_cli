@@ -12,7 +12,7 @@ module.exports = {
         app: './src/main.js',
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].bundle.js'
     },
     //快速定位错误信息
     devtool: 'inline-source-map',
@@ -35,17 +35,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env'],
-                        },
-                    },
-                ],
-            },
-            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
@@ -61,8 +50,11 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                //load加载顺序是从下往上
                 use: ['vue-style-loader', 'css-loader', 'less-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -71,13 +63,11 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             limit: 10 * 1024,
+                            esModule: false,
+                            mimetype: false,
                         },
                     },
                 ],
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ['file-loader'],
             },
         ],
     },

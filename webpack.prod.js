@@ -2,20 +2,28 @@ const { merge } = require('webpack-merge')
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
 module.exports = merge(common, {
+    mode: 'production',
     // plugins: [new UglifyJSPlugin()],
     module: {
         rules: [
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.js$/,
                 use: [
                     {
-                        loader: 'url-loader',
+                        loader: 'babel-loader',
                         options: {
-                            limit: 10 * 1024,
+                            presets: ['@babel/preset-env'],
+                            exclude: /node_modules/
                         },
                     },
                 ],
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [{
+                    loader: 'file-loader',
+                }]
+            }
         ],
     },
 })
