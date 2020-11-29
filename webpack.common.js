@@ -15,7 +15,7 @@ module.exports = {
         filename: '[name].bundle.js'
     },
     //快速定位错误信息
-    devtool: 'inline-source-map',
+    devtool: 'eval-cheap-module-source-map',
     //web服务器实现热更新
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
