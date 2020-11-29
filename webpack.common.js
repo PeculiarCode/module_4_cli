@@ -1,5 +1,5 @@
 const path = require('path')
-const { Configuration } = require('webpack')
+// const { Configuration } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
@@ -21,13 +21,18 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 8010,
-        hot: true,
+        hotOnly: true,
+        overlay: {
+            errors: true,
+            warnings: true
+        }
     },
     plugins: [
         new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             title: 'vue-cli',
+            template: 'public/index.html',
         }),
         new webpack.HotModuleReplacementPlugin(),
     ],
@@ -35,6 +40,12 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    attributes: false
+                },
+            }, {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
@@ -47,16 +58,13 @@ module.exports = {
                         ],
                     },
                 },
-            },
-            {
+            }, {
                 test: /\.less$/,
                 use: ['vue-style-loader', 'css-loader', 'less-loader'],
-            },
-            {
+            }, {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            },
-            {
+            }, {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     {
@@ -68,7 +76,21 @@ module.exports = {
                         },
                     },
                 ],
-            },
+            }, {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: [{
+                    loader: 'file-loader',
+                }]
+            }, {
+                test: /\.js|vue$/,
+                enforce: 'pre',
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+                options: {
+                    emitError: true,
+                    emitWarning: true
+                },
+            }
         ],
     },
 }
