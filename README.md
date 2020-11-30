@@ -24,3 +24,7 @@
 8. uglifyjs-webpack-plugin 进行生产代码压缩,减少打包体积
 9. eslint,eslint-loader,eslint-plugin-vue 配合.eslint 文件进行代码风格校验
 10. eslint 检验错误,devServer 服务启动失败,将错误信息显示在静态服务器,.eslint 常用规则校验
+
+### 作业地址分两个模块
+- https://github.com/PeculiarCode/module_4_cli
+- https://github.com/PeculiarCode/module_4
