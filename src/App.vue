@@ -1,18 +1,18 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png" />
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <img src="./assets/logo.png" />
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+    name: 'App'
 }
 </script>
 
 <style>
 #app {
-  text-align: center;
+    text-align: center;
 }
 </style>
